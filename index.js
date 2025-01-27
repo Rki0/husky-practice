@@ -19,9 +19,6 @@ console.log("Initialize husky.");
 
 const huskyPreCommitPath = path.resolve(process.cwd(), ".husky/pre-commit");
 const gitCommitBlockCode = `
-#!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
-
 if [ "$CZ_TEST" != "true" ]; then
   echo "Don't use git commit. Please use npm run commit."
   exit 1

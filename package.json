@@ -4,7 +4,6 @@
   "description": "This is for setting up the commit convention.",
   "main": "index.js",
   "private": false,
-  "type": "module",
   "bin": {
     "commit-automation-with-cz-rki0": "index.js"
   },
