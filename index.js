@@ -1,7 +1,8 @@
+#!/usr/bin/env node
+
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
-import { exit } from "process";
 
 const packageJsonPath = path.resolve(process.cwd(), "package.json");
 const isTherePackageJson = fs.existsSync(packageJsonPath);
@@ -18,8 +19,7 @@ execSync("npx husky init");
 console.log("Initialize husky.");
 
 const huskyPreCommitPath = path.resolve(process.cwd(), ".husky/pre-commit");
-const gitCommitBlockCode = `
-if [ "$CZ_TEST" != "true" ]; then
+const gitCommitBlockCode = `if [ "$CZ_TEST" != "true" ]; then
   echo "Don't use git commit. Please use npm run commit."
   exit 1
 fi
@@ -88,5 +88,3 @@ const czConfigContent = `module.exports = {
 
 fs.writeFileSync(czConfigPath, czConfigContent, "utf8");
 console.log("cz-config.js updated.");
-
-exit(1);

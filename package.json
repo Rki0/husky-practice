@@ -1,16 +1,19 @@
 {
-  "name": "commit-automation-with-cz-rki0",
-  "version": "4.0.0",
+  "name": "commit-automation-with-cz-rki1",
+  "version": "1.0.0",
   "description": "This is for setting up the commit convention.",
   "main": "index.js",
   "private": false,
+  "type": "module",
+  "files": [
+    "index.js"
+  ],
   "bin": {
-    "commit-automation-with-cz-rki0": "index.js"
+    "commit-automation-with-cz-rki1": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node index.js",
-    "prepare": "husky",
     "commit": "CZ_TEST=true cz"
   },
   "author": "",

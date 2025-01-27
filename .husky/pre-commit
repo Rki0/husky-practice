@@ -1,4 +1,0 @@
-if [ "$CZ_TEST" != "true" ]; then
-  echo "Don't use git commit. Please use npm run commit."
-  exit 1
-fi
