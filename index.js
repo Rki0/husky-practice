@@ -8,7 +8,7 @@ const packageJsonPath = path.resolve(process.cwd(), "package.json");
 const isTherePackageJson = fs.existsSync(packageJsonPath);
 
 if (!isTherePackageJson) {
-  execSync("npm init");
+  execSync("npm init -y");
   console.log("Initialize package manager.");
 }
 
