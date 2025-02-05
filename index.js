@@ -2,12 +2,11 @@
 
 import fs from "fs";
 import path from "path";
-import { execSync } from "child_process";
-import { exit } from "process";
 
-import { PACKAGE_MANAGER, askPackageManager } from "./prompt.js";
+import { askPackageManager } from "./prompt.js";
 import { initialize } from "./initialize.js";
 import { installDependencies } from "./dependencies.js";
+import { intializeHusky } from "./initializeHusky.js";
 
 const packageManager = await askPackageManager();
 
@@ -19,24 +18,7 @@ if (!isTherePackageJson) {
 }
 
 installDependencies();
-
-switch (packageManager) {
-  case PACKAGE_MANAGER.npm:
-    execSync("npx husky init");
-    console.log("Initialize husky.");
-
-    break;
-  case PACKAGE_MANAGER.yarn:
-    console.log("You choose yarn");
-    exit(1);
-    break;
-  case PACKAGE_MANAGER.pnpm:
-    console.log("You choose pnpm");
-    exit(1);
-    break;
-  default:
-    break;
-}
+intializeHusky();
 
 const huskyPreCommitPath = path.resolve(process.cwd(), ".husky/pre-commit");
 const gitCommitBlockCode = `if [ "$CZ_TEST" != "true" ]; then
