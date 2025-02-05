@@ -7,6 +7,7 @@ import { askPackageManager } from "./prompt.js";
 import { initialize } from "./initialize.js";
 import { installDependencies } from "./dependencies.js";
 import { intializeHusky } from "./initializeHusky.js";
+import { blockDirectCommitCommand } from "./gitAction.js";
 
 const packageManager = await askPackageManager();
 
@@ -19,16 +20,7 @@ if (!isTherePackageJson) {
 
 installDependencies();
 intializeHusky();
-
-const huskyPreCommitPath = path.resolve(process.cwd(), ".husky/pre-commit");
-const gitCommitBlockCode = `if [ "$CZ_TEST" != "true" ]; then
-  echo "Don't use git commit. Please use npm run commit."
-  exit 1
-fi
-`;
-
-fs.writeFileSync(huskyPreCommitPath, gitCommitBlockCode, "utf8");
-console.log(".husky/pre-commit is initialized.");
+blockDirectCommitCommand();
 
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
