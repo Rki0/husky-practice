@@ -7,6 +7,7 @@ import { exit } from "process";
 
 import { PACKAGE_MANAGER, askPackageManager } from "./prompt.js";
 import { initialize } from "./initialize.js";
+import { installDependencies } from "./dependencies.js";
 
 const packageManager = await askPackageManager();
 
@@ -17,11 +18,10 @@ if (!isTherePackageJson) {
   initialize(packageManager);
 }
 
+installDependencies();
+
 switch (packageManager) {
   case PACKAGE_MANAGER.npm:
-    execSync("npm i -D commitizen cz-customizable husky inquirer");
-    console.log("Dependencies are installed.");
-
     execSync("npx husky init");
     console.log("Initialize husky.");
 
