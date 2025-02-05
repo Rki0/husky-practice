@@ -8,6 +8,7 @@ import { initialize } from "./initialize.js";
 import { installDependencies } from "./dependencies.js";
 import { intializeHusky } from "./initializeHusky.js";
 import { blockDirectCommitCommand } from "./gitAction.js";
+import { updatePackageJson } from "./updatePackageJson.js";
 
 const packageManager = await askPackageManager();
 
@@ -21,26 +22,7 @@ if (!isTherePackageJson) {
 installDependencies();
 intializeHusky();
 blockDirectCommitCommand();
-
-const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
-
-packageJson.scripts = {
-  ...packageJson.scripts,
-  commit: "CZ_TEST=true cz",
-};
-
-packageJson.config = {
-  ...packageJson.config,
-  commitizen: {
-    path: "cz-customizable",
-  },
-  "cz-customizable": {
-    config: "cz-config.js",
-  },
-};
-
-fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), "utf8");
-console.log("package.json updated.");
+updatePackageJson(packageJsonPath);
 
 const czConfigPath = path.resolve(process.cwd(), "cz-config.js");
 
