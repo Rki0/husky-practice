@@ -6,19 +6,19 @@ import { execSync } from "child_process";
 import { exit } from "process";
 
 import { PACKAGE_MANAGER, askPackageManager } from "./prompt.js";
+import { initialize } from "./initialize.js";
 
 const packageManager = await askPackageManager();
 
 const packageJsonPath = path.resolve(process.cwd(), "package.json");
 const isTherePackageJson = fs.existsSync(packageJsonPath);
 
+if (!isTherePackageJson) {
+  initialize(packageManager);
+}
+
 switch (packageManager) {
   case PACKAGE_MANAGER.npm:
-    if (!isTherePackageJson) {
-      execSync("npm init -y");
-      console.log("Initialize package manager.");
-    }
-
     execSync("npm i -D commitizen cz-customizable husky inquirer");
     console.log("Dependencies are installed.");
 
