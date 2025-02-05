@@ -3,20 +3,61 @@
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
+import { select } from "@inquirer/prompts";
+import { exit } from "process";
+
+const PACKAGE_MANAGER = Object.freeze({
+  npm: "npm",
+  yarn: "yarn",
+  pnpm: "pnpm",
+});
+
+const packageManager = await select({
+  message: "Choose your package manager.",
+  choices: [
+    {
+      name: PACKAGE_MANAGER.npm,
+      value: PACKAGE_MANAGER.npm,
+    },
+    {
+      name: PACKAGE_MANAGER.yarn,
+      value: PACKAGE_MANAGER.yarn,
+    },
+    {
+      name: PACKAGE_MANAGER.pnpm,
+      value: PACKAGE_MANAGER.pnpm,
+    },
+  ],
+});
 
 const packageJsonPath = path.resolve(process.cwd(), "package.json");
 const isTherePackageJson = fs.existsSync(packageJsonPath);
 
-if (!isTherePackageJson) {
-  execSync("npm init -y");
-  console.log("Initialize package manager.");
+switch (packageManager) {
+  case PACKAGE_MANAGER.npm:
+    if (!isTherePackageJson) {
+      execSync("npm init -y");
+      console.log("Initialize package manager.");
+    }
+
+    execSync("npm i -D commitizen cz-customizable husky inquirer");
+    console.log("Dependencies are installed.");
+
+    execSync("npx husky init");
+    console.log("Initialize husky.");
+
+    break;
+  case PACKAGE_MANAGER.yarn:
+    console.log("You choose yarn");
+    exit(1);
+    break;
+  case PACKAGE_MANAGER.pnpm:
+    console.log("You choose pnpm");
+    exit(1);
+    break;
+  default:
+    break;
 }
-
-execSync("npm i -D commitizen cz-customizable husky");
-console.log("Dependencies are installed.");
-
-execSync("npx husky init");
-console.log("Initialize husky.");
 
 const huskyPreCommitPath = path.resolve(process.cwd(), ".husky/pre-commit");
 const gitCommitBlockCode = `if [ "$CZ_TEST" != "true" ]; then
