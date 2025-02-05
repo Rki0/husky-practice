@@ -3,32 +3,11 @@
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
-import { select } from "@inquirer/prompts";
 import { exit } from "process";
 
-const PACKAGE_MANAGER = Object.freeze({
-  npm: "npm",
-  yarn: "yarn",
-  pnpm: "pnpm",
-});
+import { PACKAGE_MANAGER, askPackageManager } from "./prompt.js";
 
-const packageManager = await select({
-  message: "Choose your package manager.",
-  choices: [
-    {
-      name: PACKAGE_MANAGER.npm,
-      value: PACKAGE_MANAGER.npm,
-    },
-    {
-      name: PACKAGE_MANAGER.yarn,
-      value: PACKAGE_MANAGER.yarn,
-    },
-    {
-      name: PACKAGE_MANAGER.pnpm,
-      value: PACKAGE_MANAGER.pnpm,
-    },
-  ],
-});
+const packageManager = await askPackageManager();
 
 const packageJsonPath = path.resolve(process.cwd(), "package.json");
 const isTherePackageJson = fs.existsSync(packageJsonPath);
