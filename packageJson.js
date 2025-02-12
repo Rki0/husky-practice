@@ -1,5 +1,7 @@
+import { execSync } from "node:child_process";
 import { FS } from "./utils/fileSystem.js";
 import { Path } from "./utils/pathSystem.js";
+import { PACKAGE_MANAGER } from "./prompt.js";
 
 export const PackageJson = {
   libraries: ["commitizen", "cz-customizable", "husky", "@inquirer/prompts"],

@@ -2,11 +2,11 @@ import { execSync } from "node:child_process";
 import { FS } from "./utils/fileSystem.js";
 import { Path } from "./utils/pathSystem.js";
 import { PACKAGE_MANAGER } from "./prompt.js";
-import { getPackageJson } from "./handlePackageJson.js";
+import { PackageJson } from "./packageJson.js";
 
 export const Husky = {
   initializeHuskyForYarn() {
-    const { packageJsonPath } = getPackageJson();
+    const { packageJsonPath } = PackageJson.get();
 
     const packageJson = JSON.parse(FS.readFileSync(packageJsonPath));
 
