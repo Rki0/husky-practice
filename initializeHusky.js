@@ -1,4 +1,19 @@
+import { execSync } from "node:child_process";
 import { PACKAGE_MANAGER } from "./prompt.js";
+import { getPackageJson } from "./handlePackageJson.js";
+
+const initializeHuskyForYarn = () => {
+  const { packageJsonPath } = getPackageJson();
+
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
+
+  packageJson.scripts = {
+    ...packageJson.scripts,
+    postinstall: "husky",
+    prepack: "pinst --disable",
+    postpack: "pinst --enable",
+  };
+};
 
 export const intializeHusky = (target) => {
   switch (target) {
@@ -6,7 +21,8 @@ export const intializeHusky = (target) => {
       execSync("npx husky init");
       break;
     case PACKAGE_MANAGER.yarn:
-      console.log("You choose yarn");
+      initializeHuskyForYarn();
+      execSync("yarn run postinstall");
       break;
     case PACKAGE_MANAGER.pnpm:
       console.log("You choose pnpm");
