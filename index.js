@@ -1,21 +1,19 @@
 #!/usr/bin/env node
 
 import { askPackageManager } from "./prompt.js";
-import { initialize } from "./initialize.js";
-import { installDependencies } from "./dependencies.js";
+import { PackageJson } from "./packageJson.js";
 import { Husky } from "./husky.js";
-import { getPackageJson } from "./handlePackageJson.js";
 import { CZ } from "./cz.js";
 
 const packageManager = await askPackageManager();
 
-const { packageJsonPath, isTherePackageJson } = getPackageJson();
+const { packageJsonPath, isTherePackageJson } = PackageJson.get();
 
 if (!isTherePackageJson) {
-  initialize(packageManager);
+  PackageJson.initialize(packageManager);
 }
 
-installDependencies(packageManager);
+PackageJson.installDependencies(packageManager);
 
 Husky.intializeHusky(packageManager);
 Husky.blockDirectCommitCommand();
