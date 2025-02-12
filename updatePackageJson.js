@@ -1,4 +1,3 @@
-import fs from "fs";
 import { FS } from "./utils/fileSystem.js";
 
 export const updatePackageJson = (path) => {
