@@ -1,3 +1,4 @@
+import { execSync } from "node:child_process";
 import { PACKAGE_MANAGER } from "./prompt.js";
 
 const libraries = [
