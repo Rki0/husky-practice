@@ -1,7 +1,8 @@
 import fs from "fs";
+import { FS } from "./utils/fileSystem.js";
 
 export const updatePackageJson = (path) => {
-  const packageJson = JSON.parse(fs.readFileSync(path, "utf8"));
+  const packageJson = JSON.parse(FS.readFileSync(path));
 
   packageJson.scripts = {
     ...packageJson.scripts,
