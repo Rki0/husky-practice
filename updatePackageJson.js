@@ -19,7 +19,7 @@ export const updatePackageJson = (path) => {
     },
   };
 
-  fs.writeFileSync(path, JSON.stringify(packageJson, null, 2), "utf8");
+  FS.writeFileSync(path, JSON.stringify(packageJson, null, 2));
 
   console.log("package.json updated.");
 };

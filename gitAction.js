@@ -1,5 +1,5 @@
-import fs from "fs";
 import path from "path";
+import { FS } from "./utils/fileSystem.js";
 
 export const blockDirectCommitCommand = () => {
   const huskyPreCommitPath = path.resolve(process.cwd(), ".husky/pre-commit");
@@ -10,6 +10,6 @@ export const blockDirectCommitCommand = () => {
 fi
 `;
 
-  fs.writeFileSync(huskyPreCommitPath, gitCommitBlockCode, "utf8");
+  FS.writeFileSync(huskyPreCommitPath, gitCommitBlockCode);
   console.log(".husky/pre-commit is initialized.");
 };

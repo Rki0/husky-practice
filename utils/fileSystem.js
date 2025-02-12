@@ -7,4 +7,7 @@ export const FS = {
   readFileSync(path) {
     return fs.readFileSync(path, "utf8");
   },
+  writeFileSync(path, data) {
+    fs.writeFileSync(path, data, "utf8");
+  },
 };

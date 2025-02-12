@@ -1,5 +1,5 @@
-import fs from "fs";
 import path from "path";
+import { FS } from "./utils/fileSystem.js";
 
 export const setCzConfig = () => {
   const czConfigPath = path.resolve(process.cwd(), "cz-config.js");
@@ -40,6 +40,6 @@ export const setCzConfig = () => {
   subjectLimit: 100,
 };`;
 
-  fs.writeFileSync(czConfigPath, czConfigContent, "utf8");
+  FS.writeFileSync(czConfigPath, czConfigContent);
   console.log("cz-config.js updated.");
 };
