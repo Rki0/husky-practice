@@ -4,7 +4,7 @@
   "description": "This is for setting up the commit convention.",
   "main": "index.js",
   "private": false,
-  "type": "module",
+  "type": "commonjs",
   "files": [
     "index.js"
   ],
@@ -14,7 +14,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node index.js",
-    "commit": "CZ_TEST=true cz"
+    "commit": "CZ_TEST=true cz",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
