@@ -2,7 +2,7 @@ import { FS } from "./utils/fileSystem.js";
 import { Path } from "./utils/pathSystem.js";
 
 export const setCzConfig = () => {
-  const czConfigPath = Path.resolve(process.cwd(), "cz-config.js");
+  const czConfigPath = Path.resolve("cz-config.js");
 
   const czConfigContent = `module.exports = {
   types: [
