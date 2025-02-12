@@ -3,8 +3,7 @@
 import { askPackageManager } from "./prompt.js";
 import { initialize } from "./initialize.js";
 import { installDependencies } from "./dependencies.js";
-import { intializeHusky } from "./initializeHusky.js";
-import { blockDirectCommitCommand } from "./gitAction.js";
+import { Husky } from "./husky.js";
 import { updatePackageJson } from "./updatePackageJson.js";
 import { setCzConfig } from "./setCzConfig.js";
 import { getPackageJson } from "./handlePackageJson.js";
@@ -18,7 +17,7 @@ if (!isTherePackageJson) {
 }
 
 installDependencies(packageManager);
-intializeHusky(packageManager);
-blockDirectCommitCommand();
+Husky.intializeHusky(packageManager);
+Husky.blockDirectCommitCommand();
 updatePackageJson(packageJsonPath);
 setCzConfig();
