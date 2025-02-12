@@ -14,6 +14,8 @@ const initializeHuskyForYarn = () => {
     prepack: "pinst --disable",
     postpack: "pinst --enable",
   };
+
+  FS.writeFileSync(path, JSON.stringify(packageJson, null, 2));
 };
 
 export const intializeHusky = (target) => {
