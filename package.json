@@ -4,18 +4,18 @@
   "description": "This is for setting up the commit convention.",
   "main": "index.js",
   "private": false,
-  "type": "commonjs",
+  "type": "module",
   "files": [
     "index.js"
   ],
   "bin": {
-    "commit-automation-with-cz-rki1": "./index.js"
+    "commit-automation-with-cz-rki1": "index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node index.js",
-    "commit": "CZ_TEST=true cz",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commit": "CZ_TEST=true cz"
   },
   "author": "",
   "license": "ISC",
@@ -31,7 +31,7 @@
       "path": "cz-customizable"
     },
     "cz-customizable": {
-      "config": "cz-config.js"
+      "config": "cz-config.cjs"
     }
   }
 }
