@@ -22,7 +22,7 @@ export const PackageJson = {
         execSync("yarn init");
         break;
       case PACKAGE_MANAGER.pnpm:
-        console.log("You choose pnpm");
+        execSync("pnpm init");
         break;
       default:
         break;
@@ -42,7 +42,7 @@ export const PackageJson = {
         execSync(`yarn add -D ${librariesCmd}`);
         break;
       case PACKAGE_MANAGER.pnpm:
-        console.log("You choose pnpm");
+        execSync(`pnpm i -D ${librariesCmd}`);
         break;
       default:
         break;

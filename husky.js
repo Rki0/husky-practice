@@ -30,7 +30,7 @@ export const Husky = {
         execSync("yarn run postinstall");
         break;
       case PACKAGE_MANAGER.pnpm:
-        console.log("You choose pnpm");
+        execSync("pnpm exec husky init");
         break;
       default:
         break;
